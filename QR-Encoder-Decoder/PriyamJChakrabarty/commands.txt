@@ -1,0 +1,1 @@
+python encode.py <input_file> <output_image>
