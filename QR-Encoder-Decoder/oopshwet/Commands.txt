@@ -1,0 +1,1 @@
+python3 qr_encoder.py <input_file> <output_image>
