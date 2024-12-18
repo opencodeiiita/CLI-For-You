@@ -1,0 +1,3 @@
+ISSUE: #26
+
+Added my story1.txt
