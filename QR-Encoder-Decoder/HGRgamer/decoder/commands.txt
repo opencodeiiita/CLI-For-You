@@ -1,0 +1,4 @@
+npm install jimp jsqr path fs
+node decode.js <input file> <output file> <is binary(true/false)>
+
+example: node decode.js input1.png output1.txt false
