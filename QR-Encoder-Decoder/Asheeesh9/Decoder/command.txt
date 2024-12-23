@@ -1,0 +1,10 @@
+first install libraries
+
+pip install pyzbar pillow
+
+then to run
+
+python qr_decoder.py <QR_image_path> <output_file_name> <is_binary(True/False)>
+
+Example:
+python qr_decoder.py qr_code.png output_image.png True
