@@ -1,0 +1,5 @@
+to get pyzbar pillow-
+pip install pyzbar pillow --break-system-packages
+
+to run-
+python3 <filename>
