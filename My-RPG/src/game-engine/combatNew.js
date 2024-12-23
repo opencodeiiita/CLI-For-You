@@ -33,6 +33,7 @@ const combat = async (player, enemy) => {
     };
 
     while (player.hp > 0 && enemy.hp > 0) {
+
         try {
             const answers = await inquirer.prompt([{
                 type: 'list',
@@ -43,30 +44,44 @@ const combat = async (player, enemy) => {
 
             if (answers.action === 'Attack') {
 
-                const stringToType = Math.random().toString(36).substring(2, 8); // Generate random string
-                console.log(chalk.cyan(`\nPrepare to attack!`));
-
-                // Trigger the prompt for typing the string with a timeout
-                const success = await promptWithTimeout(stringToType);
-
-                if (success) {
-
-                    const damage = Math.floor(Math.random() * player.attack) + 5;
-                    enemy.hp -= damage;
-                    console.log(chalk.green(`\nYou dealt ${damage} damage to ${enemy.name}!`));
-
-                    if (enemy.hp <= 0) {
-                        console.log(chalk.green(`\n🎉 You defeated the ${enemy.name}!`));
-                        return true; // Victory
-                    }
+                while(player.hp > 0 && enemy.hp > 0){
 
                     console.log(chalk.blue(`\nYour HP: ${chalk.green(player.hp)} | Enemy HP: ${chalk.red(enemy.hp)}\n`));
 
-                    continue;
+                    const stringToType = Math.random().toString(36).substring(2, 8); // Generate random string
+                    console.log(chalk.cyan(`\nPrepare to attack!`));
+    
+                    // Trigger the prompt for typing the string with a timeout
+                    const success = await promptWithTimeout(stringToType);
+    
+                    if (success) {
+    
+                        const damage = Math.floor(Math.random() * player.attack) + 5;
+                        enemy.hp -= damage;
+                        console.log(chalk.green(`\nYou dealt ${damage} damage to ${enemy.name}!`));
+    
+                        if (enemy.hp <= 0) {
+                            console.log(chalk.green(`\n🎉 You defeated the ${enemy.name}!`));
+                            return true; // Victory
+                        }
+    
+                        console.log(chalk.blue(`\nYour HP: ${chalk.green(player.hp)} | Enemy HP: ${chalk.red(enemy.hp)}\n`));
+    
+                        continue;
+    
+                    } else {
 
-                } else {
-                    console.log(chalk.red(`\nYou failed to attack in time! The enemy takes its chance to attack!`));
+                        console.log(chalk.red(`\nYou failed to attack in time! The enemy takes its chance to attack!`));
+                        
+                        const enemyDamage = Math.floor(Math.random() * enemy.attack) + 5;
+                        player.hp -= enemyDamage;
+                        console.log(chalk.red(`\n${enemy.name} attacked you for ${enemyDamage} damage!`));
+
+                    }
+
                 }
+
+                
             } else if (answers.action === 'Defend') {
                 console.log(chalk.blue(`\nYou brace yourself, reducing incoming damage.`));
             } else if (answers.action === 'Run') {
@@ -81,11 +96,7 @@ const combat = async (player, enemy) => {
             if (answers.action === 'Defend') {
                 player.hp -= Math.max(0, enemyDamage - 10);
                 console.log(chalk.red(`\n${enemy.name} attacked you for ${Math.max(0, enemyDamage - 10)} damage!`));
-            } else {
-                player.hp -= enemyDamage;
-                console.log(chalk.red(`\n${enemy.name} attacked you for ${enemyDamage} damage!`));
             }
-
             if (player.hp <= 0) {
                 console.log(chalk.red(`\nYou were defeated by the ${enemy.name}! 💀`));
                 return false; // Defeat
