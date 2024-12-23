@@ -1,1 +1,1 @@
-python qr_decode.py <input_file_path> <output_file_path>
+node decode.js <input_file> <output_qr_image>
