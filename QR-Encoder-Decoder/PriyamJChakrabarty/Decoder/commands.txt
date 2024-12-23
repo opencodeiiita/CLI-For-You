@@ -1,0 +1,4 @@
+node decode.js <Is Binary = true/false> <qr path> <output path>
+
+Example
+node decode.js true Qr.png out.png

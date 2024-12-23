@@ -1,0 +1,1 @@
+npm install jsqr pngjs base64-js

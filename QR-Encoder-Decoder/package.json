@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/opencodeiiita/CLI-For-You#readme",
   "dependencies": {
+    "base64-js": "^1.5.1",
+    "jsqr": "^1.4.0",
+    "pngjs": "^7.0.0",
     "qr-encoder-decoder": "file:"
   }
 }

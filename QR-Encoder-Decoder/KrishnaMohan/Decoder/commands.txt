@@ -1,0 +1,1 @@
+python qr_decoder.py <input_file> <output_file> --binary
