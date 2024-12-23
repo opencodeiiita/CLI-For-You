@@ -1,6 +1,9 @@
 import chalk from "chalk";
 import Item from "./Item.js";
 import displayStory from "./story.js";
+import combat from './combatNew.js';
+
+//displayStory();
 
 export class GameEngine {
   constructor() {
@@ -34,7 +37,7 @@ export class GameEngine {
     }
   }
 
-  handleCommand(command) {
+  async handleCommand(command) {  // Made async to handle the await from combat
     const [cmd, ...args] = command.toLowerCase().split(" ");
 
     switch (cmd) {
@@ -43,7 +46,7 @@ export class GameEngine {
           "Available commands: help, storymode, stats, explore, attack, pickup <item>, inventory, use <item>, quit"
         );
       case "storymode":
-        displayStory();
+        await displayStory();
         return;
       //updated the stats command to include the attack points
       case "stats":
@@ -59,10 +62,9 @@ export class GameEngine {
 
       case "explore":
         return this.randomItemPicker();
-      // return chalk.yellow("You explore the area and find nothing... for now.");
 
       case "attack":
-        return chalk.red("You swing your weapon and deal 10 damage!");
+        return;
 
       //commands for pickup inventory and use item
       case "pickup":
