@@ -1,1 +1,3 @@
 opencv-python
+numpy
+# base64               # Standard library, no need to install
