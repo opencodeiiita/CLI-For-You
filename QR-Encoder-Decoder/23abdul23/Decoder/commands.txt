@@ -1,0 +1,6 @@
+decode.py qr_code output_file(with extension) type(binary/normal)
+
+example:
+decode.py test1_binary.png out1.png binary
+
+decode.py test2_normal.png out2.txt normal
