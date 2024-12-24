@@ -9,7 +9,6 @@ The solution involves two key steps:
 - Uploading the file to a cloud storage platform.
 - Generating a shareable URL for the uploaded file to encode in the QR code.
 
----
 
 ->2. Researching File Upload Methods
 
