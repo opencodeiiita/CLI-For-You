@@ -1,0 +1,2 @@
+pip install opencv-python pyzbar qrcode
+python qr_decoder.py
