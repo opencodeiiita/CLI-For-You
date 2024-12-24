@@ -1,0 +1,4 @@
+jimp
+jsqr
+path
+fs
