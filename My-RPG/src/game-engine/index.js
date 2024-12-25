@@ -1,7 +1,6 @@
 import chalk from "chalk";
 import Item from "./Item.js";
 import displayStory from "./story.js";
-import combat from './combatNew.js';
 
 //displayStory();
 

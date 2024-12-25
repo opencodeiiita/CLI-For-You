@@ -8,7 +8,7 @@ const combat = async (player, enemy) => {
     console.log(chalk.red(`\n🚨 You are attacked by a ${enemy.name}! 🚨`));
     console.log(chalk.blue(`\nYour HP: ${chalk.green(player.hp)} | Enemy HP: ${chalk.red(enemy.hp)}\n`));
 
-    const promptWithTimeout = async (stringToType, timeout = 5000) => {
+    const promptWithTimeout = async (stringToType, timeout = 6000) => {
 
         return new Promise((resolve) => {
             let timeoutHandle = setTimeout(() => {

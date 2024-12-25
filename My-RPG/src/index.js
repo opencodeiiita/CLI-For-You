@@ -4,6 +4,9 @@ import chalk from 'chalk';
 import readline from 'readline';
 import figlet from 'figlet';
 import { GameEngine } from './game-engine/index.js';
+import musicPlayer from './game-engine/musicPlayer.js';
+
+process.env.NODE_NO_WARNINGS = '1';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -11,6 +14,8 @@ const rl = readline.createInterface({
 });
 
 const game = new GameEngine();
+
+musicPlayer.play('game-engine/music/bg_relaxing.mp3', false);
 
 console.log(chalk.green(figlet.textSync('RPG CLI Game', { horizontalLayout: 'full' })));
 

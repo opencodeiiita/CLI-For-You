@@ -5,6 +5,7 @@ import ora from 'ora';
 import inquirer from 'inquirer';
 import combat from './combatNew.js';
 import art from './art.js';
+import musicPlayer from './musicPlayer.js';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -14,6 +15,9 @@ async function displayStory() {
         hp: 100,
         attack: 25,
     };
+
+    await sleep(1000);
+    musicPlayer.play('game-engine/music/warm-hug.mp3');
 
     const spinner = ora('Generating story ...').start();
     spinner.color = 'yellow';
@@ -72,6 +76,10 @@ async function displayStory() {
         if(!story[i].line.endsWith('\n')) process.stdout.write(" ");
         await sleep(1000);//a pause after each sentence
     }
+
+    musicPlayer.stop();
+    await sleep(500);
+    musicPlayer.play('game-engine/music/showdown.wav')
 
     console.log(chalk.blue('=============================================================='));
     console.log(chalk.cyan('Your journey begins now, traveler...'));
@@ -155,16 +163,25 @@ async function displayStory() {
     }
 
     console.log(chalk.green("\n🎉 You defeated the Syndicate Commander and learned the truth."));
-    await sleep(2000);
 
+    musicPlayer.stop();
+    await sleep(4000);
+
+    musicPlayer.play('game-engine/music/s1.wav', true);
     console.log(chalk.yellow("\nThe Commander, breathing heavily, reveals the truth."));
     console.log(chalk.yellow("'The Syndicate was never about control... It was about survival.'"));
-    await sleep(2000);
+    await sleep(5500);
 
+    
+    musicPlayer.play('game-engine/music/s2.wav', true);
     console.log(chalk.yellow("\nThey explain: 'The world is on the brink of an alien invasion, and we built this dystopia to prepare humanity for the future.'"));
-    console.log(chalk.yellow("The Rebels, blinded by their pursuit of freedom, have failed to see the bigger picture."));
-    await sleep(2500);
+    await sleep(7500)
 
+    musicPlayer.play('game-engine/music/s3.wav', true);
+    console.log(chalk.yellow("The Rebels, blinded by their pursuit of freedom, have failed to see the bigger picture."));
+    await sleep(5500);
+
+    musicPlayer.play('game-engine/music/mining_theme.mp3', true);
     console.log(chalk.yellow("\nYou realize the Rebel Leader has been manipulating you all along."));
     console.log(chalk.yellow("'You were kidnapped. Your memories erased... to weaponize your skills for our cause.'"));
     await sleep(2000);
@@ -186,6 +203,9 @@ async function displayStory() {
     } else {
         console.log(chalk.cyan("\nYou side with the Syndicate, prioritizing humanity’s survival in the face of the alien threat."));
     }
+
+    musicPlayer.stop();
+    await sleep(500);
 
     console.log(chalk.green(figlet.textSync('The End', { font: 'Standard' })));
     console.log(chalk.blue('=============================================================='));
