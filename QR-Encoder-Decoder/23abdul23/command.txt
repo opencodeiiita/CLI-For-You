@@ -1,0 +1,6 @@
+encode.py inputfile_path output_qr_name
+
+
+example:
+
+encode.py test.txt qr1.png
