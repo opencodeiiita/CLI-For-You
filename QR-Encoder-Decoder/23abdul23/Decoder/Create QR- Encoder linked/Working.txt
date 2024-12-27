@@ -9,3 +9,19 @@ So I came to choose Google Drive as my final stop.
 
 I have used the Google Cloud Console and ith Google Drive API, integrated my qr code encoder to encode the 
 "id" it returns for the files that we upload using this and stores the QR code in .png format.
+
+My basic structure or working is like This
+
+--> You make a service account on Google Cloud
+    |--> Download it's key (.json file)
+    |--> Set your file path to "SERVICE_ACCOUNT_FILE"
+
+---> You have made a personal G-Drive for yourself
+
+---> You upload your files of any type, and you receive a ID back from the cloud
+
+---> You simply use your previous Encoder to encode that "ID" to make a QR code .png file
+
+---> That QR is then can be shared, and Decoder is used to retrieve back the "ID"
+
+---> For the same service account thi ID, can be used to download your files back from the Cloud.
