@@ -9,4 +9,4 @@
 ## Running the Project
 ```bash
 cd "QR-Encoder Link"
-python QR_link.py
+python main/QR_link.py
