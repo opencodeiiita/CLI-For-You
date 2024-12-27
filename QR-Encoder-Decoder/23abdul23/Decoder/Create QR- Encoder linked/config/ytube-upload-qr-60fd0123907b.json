@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ytube-upload-qr",
+  "private_key_id": "60fd0123907bbcf5cba6493ce851c3224256d1c6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC0wsf0U2QFGJ2I\n497lfPucDi3qie9C0Y6vKZUh1lQ38OE5s404SiIvxJzDGuU/mLemcl+qRk4ChtMf\nHnobxarrvjwDlpSy2D+fzjM9CTlJsvtlJBgjPLPHOJzNILOgM3e50wM79YIXY/qR\nQB5ut+HT0O4oMv+uVJMx6Pol95u97oE+dxppsdDobVeeLO9hs7gbxKe+w7TLcO9r\njHzuH6SsLkcPnB5HLQtiGHykze8iUub9YBcRHjOuQn+msOLKl469dpaTJnyeqPEe\n4BXZhdpS3xvQmTgd0Ibt2wUVj+PHSuH0TkhkF4qIUs0sv7Iyvk/nSGxWhig0e3fW\nXO3YusCbAgMBAAECggEAQOY2OGjAXnwKA54c5zRKeis1HSJM/yaSHh3F55I2Rqd7\nleX7bBxhzdi/l+VOLdk9BsvFwTLgy1Nw9ZlRqir8RQvWLEuiM9wka9Hy35UyNl3G\nmPeumugue/a9hYCaPYh9EgDLBnoNLSy+R+xHgOUQdaZr+47j8cl319GYDo2qIzSm\nDNRF1zn4axGK/ZXnXjD0ZpineF+9g1PPuY++G4Kg59eibD5b+766XFiYHL2wv3KC\nMpyCB01A/xCsy8zyJatwRTTCqIRGHfkrd9vUEst6atMZIca5AygJKhiYW6ZrEFa/\nGJdX4DC4In1RgcW7qwvVfOlPuPgf8573Ink4Fw/IQQKBgQDjCaN4a8RnqdvUBmyP\nJh5+63ykLFQ01e4MZifDQKsh0XnHsLAL3rj5GxP8SHIfempujFBnWBRTlJPFmku5\njkRd+qUWKNraMIMZSK5PCs4QbhR06axJWrcgjponJIpHSEu5yQPoSKyQ+hOrN0D1\nYugC+oAv43qECSKowqt771P6kQKBgQDL0eIHvpwDSkDwKQIDiVNwKGonYHwDRAbY\nsTCuJzaJIz7Gp/XLwQGz2fh2pDt13S7uc+dyO49B8vndGQS5Rsu3fRFusGqBF5Mg\nC45oRxMI3L7yIwFE6LtO+q8NSZMP0B42u78s0zw7YvkWyNTH0EyqhqgGdgzI1jbE\n1ZZ6lzemawKBgGoW9uwub3iBRtesqM27YkSshXGxxSdrT/E7SxlR/qWu3NkTFzB0\nwrqkjJI2yB0tds5xgqDH57emleagUwJCGHBRzxKrxJhwUtJdxBXrVp8W0ThQeNFO\nMoRkHmRsDrGAduI5rDm+u+SC9u3qw8/mh8PciknWYkmQe0GgtcET9IoBAoGAQalO\n8QHGDwVH4FbFsE/4UmSitibOLNsofXyv2xsE5a82FRedBtQZ8U/iTI5iHXlxGh66\nzEFFyJA3ULQzomCdVnJzQD6TQR1QJ32xlgR3rF45IZaHXSTA2xPFezldqDV61lUr\npIw0lkkvR9jRO8HuQO16igJT4guov0az4LCAnBsCgYAHhTLRQa8Wgk0UkO/IA68w\nS4bB+OQ30MwVJVhCCuwDb6+ZTVNVtpdC6t5l8vv4WWVXo0AAWhb8fKGTa+7rv+Qc\nnRdi+wDBQUQYDPaHV0rUSRiaP3sQCYnnCNKoyGjjStSEmCP2Rfy/cWlSnEsmfvT2\nQskVVdaF46SBX/eDBm0s1Q==\n-----END PRIVATE KEY-----\n",
+  "client_email": "qr-url@ytube-upload-qr.iam.gserviceaccount.com",
+  "client_id": "111772708602729089706",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/qr-url%40ytube-upload-qr.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
