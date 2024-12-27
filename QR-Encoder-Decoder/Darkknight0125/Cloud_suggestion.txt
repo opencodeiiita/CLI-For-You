@@ -1,0 +1,107 @@
+### Problem: To upload a file on cloud and encode its url.
+
+### Proposed Solution:
+
+I have seen others suggestions about various cloud services and I have nothing to add in terms of those clouds, but I would like to suggest another cloud option, Cloudinary.
+
+Actually I worked on some other repos regarding storing files on cloud storage platforms and at that time I was suggested to use Firebase, AWS, etc, but an issue that I faced was that they required card details and I would not trust others to use a cloud server created using my details. If we were talking about industry or corporate level projects then absolutely paid ones are best, but for our personal projects that are to be deployed, lets not take the risk of leaking our cloud key details in public.
+
+--- I would suggest Cloudinary for various reasons.
+
+1. FREE: Its free to use upto a limit which I suppose is fine for our expected task. The free plan provides sufficient storage and bandwidth for initial deployment.
+
+2. EASY TO IMPLEMENT: Writing code for it is very easy in various programming languages, I personally used node js for other repo tasks and below here is the basic code in python and node js:
+
+-> Python:
+
+Setup Instructions:
+
+    => pip install cloudinary // Install the cloudinary Python library
+    => Obtain your Cloudinary Cloud Name, API Key, and API Secret from the Cloudinary Dashboard.
+
+Code: 
+
+    import cloudinary
+    import cloudinary.uploader
+
+    # Configure Cloudinary
+    cloudinary.config(
+        cloud_name='your-cloud-name',
+        api_key='your-api-key',
+        api_secret='your-api-secret'
+    )
+
+    # Function to upload file
+    def upload_file(file_path):
+        try:
+            result = cloudinary.uploader.upload(file_path, resource_type='auto')
+            print('File uploaded successfully:', result['secure_url'])
+            return result['secure_url']
+        except Exception as e:
+            print('Error uploading file:', e)
+
+    # Example usage
+    upload_file('./path/to/your/file.jpg')  # Replace with your file path
+
+
+-> Node.js 
+
+Setup Instructions:
+    
+    => npm install cloudinary // Install the cloudinary package
+    => Obtain your Cloudinary Cloud Name, API Key, and API Secret from the Cloudinary Dashboard.
+
+Code:
+
+    const cloudinary = require('cloudinary').v2;
+
+    // Configure Cloudinary
+    cloudinary.config({
+    cloud_name: 'your-cloud-name',
+    api_key: 'your-api-key',
+    api_secret: 'your-api-secret',
+    });
+
+    // Function to upload file
+    const uploadFile = async (filePath) => {
+    try {
+        const result = await cloudinary.uploader.upload(filePath, {
+        resource_type: 'auto', // Automatically detect file type
+        });
+        console.log('File uploaded successfully:', result.secure_url);
+        return result.secure_url;
+    } catch (error) {
+        console.error('Error uploading file:', error);
+    }
+    };
+
+    // Example usage
+    uploadFile('./path/to/your/file.jpg'); // Replace with your file path
+
+-> There is support for various other languages too but I think these two would be best, and moreover, we could even use multiple languages as we do not require any compatibility with the decoder. To put simply, we can use any language to upload the file, and cloudinary will return us a link that we can simply pass to a program in another language by file handling (write url in a text file and make encoder read it and delete the link).
+
+3. SECURITY: It works as a normal cloud server and the files and data uploaded are secure and safe, we can be rest assured about that.
+
+4. AUTOMATED URL: Whenever we upload any file, we automatically get a url that points to the file in our server, which is ideal for QR code embedding and the file could only be accessed by the admin or using that link, furthermore, we could add restrictions to the url providing even better support.
+
+Some other perks:
+=> File Optimization: It optimizes uploaded files, reducing load time when accessed via QR.
+=> Scalability: Cloudinary supports a wide range of file types and sizes, making it ideal for expanding use cases.
+
+--- Why Prefer Cloudinary Over Alternatives?
+
+1. Google Drive:
+=>Manual setup required for public folders.
+=>No direct CLI support for file uploads without external tools like gdrive.
+
+2. Dropbox: 
+=> CLI upload requires additional setup.
+
+3. AWS S3:
+=> Powerful but complex for small-scale usage.
+=> Requires more authentication setup compared to Cloudinary.
+
+4. Jugaadu Methods:
+=> While innovative, these methods (e.g., creating public Google Drive folders) might compromise security and reliability.
+
+### In a nutshell I would suggest that some more clarity be provided for our file size and our purpose, as if we are going for a simple to use cloud which most people can contribute in, then the choice is cloudinary, but if you are expecting to upload gigabytes of GTA games to a cloud then you wont get that from any free cloud service you pirate.
