@@ -27,6 +27,9 @@ credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCO
 # Build the Google Drive service
 drive_service = build('drive', 'v3', credentials=credentials)
 
+
+
+# Function to upload a file to Google Drive
 def upload_file(file_path, file_name, mime_type='text/plain', parent_folder_id=None):
     """Upload a file to Google Drive."""
     file_metadata = {
@@ -38,8 +41,10 @@ def upload_file(file_path, file_name, mime_type='text/plain', parent_folder_id=N
     body=file_metadata, media_body=media, fields='id').execute()
     print(f"Uploaded file with ID: {file.get('id')}\n")
 
+    #This ID will be used to generate QR code
     return file.get('id')
 
+# Function to download a file from Google Drive
 def download_file(file_id, destination_path):
     """Download a file from Google Drive by its ID."""
     request = drive_service.files().get_media(fileId=file_id)
@@ -52,6 +57,7 @@ def download_file(file_id, destination_path):
         status, done = downloader.next_chunk()
         print(f"\nDownload {int(status.progress() * 100)}%.")
 
+# Function to generate a QR code
 def qr_genrate(id, output_qr_path):
 
     base64_data = base64.b64encode(id.encode("utf-8")).decode("utf-8")
@@ -70,6 +76,7 @@ def qr_genrate(id, output_qr_path):
     img.save(output_qr_path)
     print("QR Code is made Succesfully...")
 
+# Function to decode a QR code
 def qr_decoder(qr_input,output_path):
     
     qr_path = qr_input
@@ -92,15 +99,22 @@ def qr_decoder(qr_input,output_path):
         print(f"Error decoding Base64: {e}")
         return
 
+    #Decoder will download the file from the Google also form within the fucntion
     download_file(decoded_data, output)
 
 
 if __name__ == '__main__':
 
+    #Step 1: Upload the file to the Google Drive
     uploaded_id = upload_file("1.png", "Test_img.png")
 
+    #Step 2: Generate the QR code
     qr_genrate(uploaded_id, "out_img.png")
 
+
+    #Step 3: Decode the QR code (This step can be done from another system also but 
+    # with the same QR code and the correct service_account_key)
+    
     qr_decoder("out_img.png", "final_img.png")
 
 
