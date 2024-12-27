@@ -72,4 +72,3 @@ startGame().catch((error) => {
   console.error(chalk.red("An unexpected error occurred."), error);
   rl.close();
 });
-
