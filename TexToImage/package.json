@@ -17,8 +17,16 @@
   },
   "homepage": "https://github.com/opencodeiiita/CLI-For-You#readme",
   "dependencies": {
+    "canvas": "^2.11.2",
+    "datauri": "^4.1.0",
+    "fs-extra": "^11.2.0",
     "jsdom": "^25.0.1",
-    "katex": "^0.16.15",
+    "katex": "^0.16.18",
+    "mathjax-node": "^2.1.1",
+    "sharp": "^0.33.5",
+    "svg2img": "^1.0.0-beta.2",
+    "svg2png": "^4.1.1",
+    "tex-to-svg": "^0.2.0",
     "textoimage": "file:"
   }
 }
