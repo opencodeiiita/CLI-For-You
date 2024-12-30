@@ -1,0 +1,152 @@
+# Feasibility Study: Uploading Files to Cloud Storage for QR Encoding
+
+## **Objective**
+To explore methods for uploading files to cloud storage platforms and encoding their URLs into QR codes, enabling the storage of large files like videos, images, etc., which exceed the data capacity of traditional QR codes.
+
+---
+
+## **Research Findings**
+
+### **1. Methods to Upload Files to Cloud Storage via Command Line**
+
+#### **a. Authenticated Methods**
+
+1. **Google Drive with gdrive CLI**
+   - Install the `gdrive` tool:
+     ```bash
+     curl -L https://github.com/prasmussen/gdrive/releases/latest/download/gdrive-linux-x64 -o gdrive
+     chmod +x gdrive
+     sudo mv gdrive /usr/local/bin/
+     ```
+   - Authenticate using Google OAuth 2.0.
+   - Upload a file:
+     ```bash
+     gdrive upload <filename>
+     ```
+   - Retrieve the file URL:
+     ```bash
+     gdrive share <file_id>
+     ```
+
+2. **AWS S3 Bucket**
+   - Install AWS CLI:
+     ```bash
+     sudo apt install awscli
+     ```
+   - Configure AWS CLI:
+     ```bash
+     aws configure
+     ```
+   - Upload a file:
+     ```bash
+     aws s3 cp <filename> s3://<bucket_name>/
+     ```
+   - Get the URL:
+     ```bash
+     https://<bucket_name>.s3.<region>.amazonaws.com/<filename>
+     ```
+
+3. **Dropbox Uploader Script**
+   - Use the Dropbox Uploader bash script:
+     ```bash
+     git clone https://github.com/andreafabrizi/Dropbox-Uploader.git
+     cd Dropbox-Uploader
+     ./dropbox_uploader.sh
+     ```
+   - Authenticate via API token.
+   - Upload a file:
+     ```bash
+     ./dropbox_uploader.sh upload <filename> /<path_in_dropbox>
+     ```
+   - Retrieve the URL using Dropbox's file-sharing API.
+
+#### **b. Non-Authenticated Methods**
+
+1. **Google Drive (Public Folder Hack)**
+   - Create a public Google Drive folder.
+   - Share it with "Anyone with the link."
+   - Use a third-party script (e.g., `gdrive`) to upload files anonymously.
+   - File URL format:
+     ```
+     https://drive.google.com/uc?id=<file_id>
+     ```
+
+2. **AnonFiles API**
+   - No authentication required.
+   - Upload a file using cURL:
+     ```bash
+     curl -F "file=@<filename>" https://api.anonfiles.com/upload
+     ```
+   - Response contains the download URL.
+
+3. **WeTransfer CLI**
+   - Use the unofficial WeTransfer CLI:
+     ```bash
+     npm install -g wetransfer-cli
+     ```
+   - Upload files:
+     ```bash
+     wt upload <filename>
+     ```
+   - Retrieve the shareable URL.
+
+4. **IPFS (InterPlanetary File System)**
+   - Install IPFS:
+     ```bash
+     sudo apt install ipfs
+     ```
+   - Add a file to the IPFS network:
+     ```bash
+     ipfs add <filename>
+     ```
+   - Get the file URL:
+     ```bash
+     https://ipfs.io/ipfs/<file_hash>
+     ```
+
+---
+
+### **2. Steps to Get the File URL**
+
+- **Google Drive**: Retrieve the file ID and construct the URL manually or via CLI tools.
+- **AWS S3**: URLs are auto-generated based on the bucket configuration.
+- **AnonFiles**: URL is returned directly after the upload.
+- **IPFS**: URL is based on the unique content hash.
+- **Dropbox**: Use Dropbox API to fetch the shareable link.
+
+---
+
+## **Creative "Jugaadu" Ideas**
+
+1. **Public Contribution Folder**
+   - Create a publicly accessible folder on Google Drive or Dropbox.
+   - Use it as a community-driven cloud storage for uploading files.
+
+2. **Hybrid Approach**
+   - Combine IPFS for decentralized storage and AnonFiles for quick access.
+
+3. **On-the-Fly File Hosting**
+   - Use temporary file-hosting services like `transfer.sh`:
+     ```bash
+     curl --upload-file <filename> https://transfer.sh/<filename>
+     ```
+   - Generate a direct URL for sharing.
+
+---
+
+## **Next Steps**
+- Choose a cloud storage method based on project requirements (speed, security, ease of use).
+- Implement file upload automation via scripts.
+- Integrate URL generation with the QR encoder module.
+
+---
+
+### **Submission Details**
+- **File Name**: `cloud_upload_research.txt`
+- **Folder**: `<your_github_id>` inside the `QR-Encoder-Decoder` repository.
+- **Format**: This text file.
+
+---
+
+Thank you for reviewing this feasibility study. Looking forward to contributing further to this innovative project!
+
