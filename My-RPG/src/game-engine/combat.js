@@ -48,7 +48,15 @@ function drawProgressBar(totalTime, timeLeft) {
   const barLength = 20;
   const filledLength = Math.floor((timeLeft / totalTime) * barLength);
   const emptyLength = barLength - filledLength;
-  const bar = "█".repeat(filledLength) + "-".repeat(emptyLength);
+  var bar="";
+  
+  if (timeLeft < totalTime / 3) {
+    var bar = chalk.red("█".repeat(filledLength) + "-".repeat(emptyLength));  // Red when less than 1/3rd
+  } else if (timeLeft >= totalTime / 3 && timeLeft < (2 * totalTime) / 3) {
+    var bar = chalk.yellow("█".repeat(filledLength) + "-".repeat(emptyLength));  // Orange in the middle
+  } else {
+    var bar = chalk.green("█".repeat(filledLength) + "-".repeat(emptyLength));  // Green when more than 2/3rd
+  }
 
   readline.moveCursor(process.stdout, 0, -1);
   readline.clearLine(process.stdout, 0);
