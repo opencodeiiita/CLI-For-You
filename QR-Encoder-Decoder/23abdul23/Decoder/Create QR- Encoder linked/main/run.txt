@@ -1,0 +1,31 @@
+#To simply test the code replace the __main__ code with this
+
+For 1.png:
+
+```
+    #Step 1: Upload the file to the Google Drive
+    uploaded_id = upload_file("1.png", "Test_img.png")
+
+    #Step 2: Generate the QR code
+    qr_genrate(uploaded_id, "out_img.png")
+
+    #Step 3: Decode the QR code (This step can be done from another system also but 
+    # with the same QR code and the correct service_account_key)
+
+    qr_decoder("out_img.png", "final_img.png")
+```
+
+For test.txt
+
+```
+    #Step 1: Upload the file to the Google Drive
+    uploaded_id = upload_file("test.txt", "Test.txt")
+
+    #Step 2: Generate the QR code
+    qr_genrate(uploaded_id, "out_txt.png")
+
+    #Step 3: Decode the QR code (This step can be done from another system also but 
+    # with the same QR code and the correct service_account_key)
+
+    qr_decoder("out_txt.png", "final_text.txt")
+```

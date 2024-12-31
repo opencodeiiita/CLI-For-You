@@ -1,0 +1,4 @@
+Trying to secure this file form git using .gitignore
+
+If this doesn't work then in your local environment you can create your own key.json file using the steps provided in Readme.md
+

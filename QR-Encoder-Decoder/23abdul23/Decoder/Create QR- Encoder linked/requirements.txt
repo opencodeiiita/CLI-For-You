@@ -1,0 +1,2 @@
+#run the following command once to install the google cloud console dependencies.
+pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client qrcode[pil] pyzbar pillow
