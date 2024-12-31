@@ -1,0 +1,28 @@
+Cloud Services That Need Authentication-
+    Google Drive: Needs you to log in with your Google account and authorize access.
+    Dropbox: Requires you to link your Dropbox account through an API or authentication.
+    AWS S3: Needs an access key and secret key for authorization.
+    Microsoft OneDrive: Requires login credentials and app permissions.
+    iCloud: Requires your Apple ID and specific configuration.
+    Cloud Services That Do Not Need Authentication
+
+Examples of cloud services that don’t require authentication include:
+    Public Google Drive Folder: A Google Drive folder set to public can allow anyone to upload files without login.
+    File.io: A quick service for file sharing that does not require creating an account.
+    Transfer.sh: A simple tool to upload and share files directly without signing up.
+    Public FTP Server: A server that accepts anonymous uploads without requiring a username or password.
+
+To upload a file to drive using command line (in linux)-
+
+command to install rclone:
+sudo apt install rclone
+
+Configure rclone for your Google Drive account:
+rclone config
+
+upload your file to a specific folder in Google Drive using:
+rclone copy //path-to-image testdrive:/foldername
+
+To get url-
+rclone link testdrive:/folder-name/fileName
+//Replace testdrive with the name of your remote, /folder-name/ with the folder path, and fileName with the uploaded file’s name.
