@@ -1,0 +1,60 @@
+To solve this issue of encoding large files in a QR, we can upload them to a cloud-based storage platform and these platforms may or may not require authentication. Some such platforms are categorized as follows:
+Platforms That Require Authentication
+
+These platforms require user accounts and access credentials (API keys, OAuth tokens, etc.) to upload files.
+
+1. Google Drive 
+   - Authentication: OAuth2 via `gdrive`, `rclone`, or Google Drive API.
+   - URL Retrieval: File ID-based URLs.
+
+2. AWS S3  
+   - Authentication: AWS Access Key and Secret Key via AWS CLI or SDKs.
+   - URL Retrieval: Public or pre-signed URLs.
+
+3. Microsoft OneDrive 
+   - Authentication: OAuth2 via Microsoft Graph API.
+   - URL Retrieval: Shareable links via API.
+
+4. iCloud (Only for Apple users)  
+   - Authentication: Apple ID and app-specific password.
+   - URL Retrieval: Shareable links via API or web interface.
+
+Platforms That Do Not Require Authentication
+
+These platforms allow uploads without requiring user accounts or credentials, often for temporary or public use.
+
+1. Transfer.sh  
+   - No authentication required.
+   - Upload via `curl` or HTTP POST.
+   - Returns a temporary shareable URL.
+
+2. File.io 
+   - No authentication required.
+   - Files are deleted after a single download (configurable).
+   - Shareable URL provided upon upload.
+
+3. GoFile.io  
+   - No authentication required for basic uploads.
+   - Shareable URL provided upon upload.
+
+A quick fix (jugaadu) solution to this is creating a public google drive folder where "anyone with the link can edit". Hence no individual authenication is needed for uploads but folder owner controls access.
+
+To do this on linux, we can use rclone. The steps to do this are as follows:
+1. Install rclone
+  sudo apt install rclone
+2. Configure it to google drive
+  rclone config
+    a. Type n to create a new remote.
+    b. Enter a name for the remote (e.g., MyDrive).
+    c. Choose drive as the storage type.
+    d. Authenticate your Google account (via the browser link provided).
+    e. Grant access to your Google Drive.
+3. Create a new folder in Google Drive
+  rclone mkdir MyDrive:folder_name
+4. Upload files to the drive 
+  rclone copy <file_path> mydrive:folder_name
+  //replace <file_path> with the actual path of your file
+5. Get the URL by
+  rclone link MyDrive:folder_name
+  //this command outputs a URL which we can encode
+  //verify whether the folder is public from the URL
