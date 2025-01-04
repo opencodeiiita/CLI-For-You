@@ -1,36 +1,103 @@
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-
+import readline from "readline";
+import keypress from "keypress";
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: true,
+});
+let timer;
+let combatInProgress = true;
+let inputLength = 0;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const drawProgressBar = (totalTime, timeLeft, stringToType) => {
+    const barLength = 20; // Length of the progress bar
+    const filledLength = Math.floor((timeLeft / totalTime) * barLength);
+    const emptyLength = barLength - filledLength;
+    let bar;
+
+    if (timeLeft < totalTime / 3) {
+        bar = chalk.red("█".repeat(filledLength) + "-".repeat(emptyLength));
+    } else if (timeLeft < (2 * totalTime) / 3) {
+        bar = chalk.yellow("█".repeat(filledLength) + "-".repeat(emptyLength));
+    } else {
+        bar = chalk.green("█".repeat(filledLength) + "-".repeat(emptyLength));
+    }
+
+    readline.moveCursor(process.stdout, 0, -1); // Move up to the progress bar line
+    readline.clearLine(process.stdout, 0); // Clear the line
+    readline.cursorTo(process.stdout, 0); // Reset cursor to the start of the line
+    process.stdout.write(`${chalk.yellow("Time left:")} [${bar}] ${timeLeft}s`); // Print the progress bar
+    readline.clearLine(process.stdout, 1); // Clear the remaining part of the line
+    process.stdout.write("\n");
+
+    // Adjust cursor position based on length of stringToType and typed input length
+    
+};
 
 const combat = async (player, enemy) => {
-
     console.log(chalk.red(`\n🚨 You are attacked by a ${enemy.name}! 🚨`));
     console.log(chalk.blue(`\nYour HP: ${chalk.green(player.hp)} | Enemy HP: ${chalk.red(enemy.hp)}\n`));
 
     const promptWithTimeout = async (stringToType, timeout = 6000) => {
-
         return new Promise((resolve) => {
-            let timeoutHandle = setTimeout(() => {
-                process.stdin.emit('data', '\n'); // Programmatically simulate pressing Enter
+            let timeLeft = Math.floor(timeout / 1000);
+            const totalTime = timeLeft;
+    
+            console.log(); // Add an empty line for the progress bar
+            drawProgressBar(totalTime, timeLeft, stringToType); // Draw the initial progress bar
+    
+            const progressBarInterval = setInterval(() => {
+                timeLeft -= 1;
+                if (timeLeft >= 0) {
+                    drawProgressBar(totalTime, timeLeft, stringToType);
+                    readline.cursorTo(process.stdout, stringToType.length + 35 + inputLength);
+                }
+            }, 1000);
+    
+            const timeoutHandle = setTimeout(() => {
+                cleanup();
+                resolve(false);
             }, timeout);
-
+    
+            const keypressHandler = () => {
+                inputLength = rl.line ? rl.line.length : 0; // Update input length
+            };
+    
+            const cleanup = () => {
+                clearTimeout(timeoutHandle);
+                clearInterval(progressBarInterval);
+                process.stdin.removeListener('keypress', keypressHandler);
+                process.stdin.setRawMode(false);
+                process.stdin.pause();
+            };
+    
+            // Start listening for keypress
+            process.stdin.setRawMode(true);
+            process.stdin.resume();
+            process.stdin.on('keypress', keypressHandler);
+    
+            // Prompt for input
             inquirer
-                .prompt([{
-                    type: 'input',
-                    name: 'typedString',
-                    message: `Type this string within ${timeout / 1000} seconds: ${chalk.yellow(stringToType)}`,
-                }])
+                .prompt([
+                    {
+                        type: 'input',
+                        name: 'typedString',
+                        message: `Type this string within ${timeout / 1000} seconds: ${chalk.yellow(stringToType)}`,
+                    },
+                ])
                 .then((answers) => {
-                    clearTimeout(timeoutHandle); // Cancel the timeout
-                    resolve(answers.typedString === stringToType); // Compare input to required string
+                    cleanup();
+                    resolve(answers.typedString === stringToType); // Check input
                 })
                 .catch(() => {
-                    clearTimeout(timeoutHandle);
-                    resolve(false); // Handle unexpected prompt closure
+                    cleanup();
+                    resolve(false);
                 });
         });
     };
+    
 
     while (player.hp > 0 && enemy.hp > 0) {
 
